@@ -1,41 +1,62 @@
 #!/bin/bash
 set -e
 
-echo 'Installing Awesome Vim from '$1
-cd $1
+usr=''
+pdir=''
 
-VIMRC="set runtimepath+=$1
+if [ -z "$1" ]
+then
+	usrd=$(echo ~)
+else
+	# convert non-directory usrs to directories
+	if [ ! -d "$1" ]; then
+		usrd=$(echo "~$1")
+	else
+		usrd="$1"
+	fi
+fi
 
-source $1/vimrcs/basic.vim
-source $1/vimrcs/filetypes.vim
-source $1/vimrcs/plugins_config.vim
-source $1/vimrcs/extended.vim
+if [ -z "$2" ]
+then
+    pdir="$(pwd)"
+else
+	pdir="$2"
+fi
+
+echo 'Installing Awesome Vim from '$pdir
+cd $pdir
+
+VIMRC="set runtimepath+=$pdir
+
+source $pdir/vimrcs/basic.vim
+source $pdir/vimrcs/filetypes.vim
+source $pdir/vimrcs/plugins_config.vim
+source $pdir/vimrcs/extended.vim
 
 try
-source $1/my_configs.vim
+source $pdir/my_configs.vim
 catch
 endtry"
 
-if [ $2 == "--all" ]; then
+if [ $usrd == "--all" ]; then
     USERS=($(ls -l /home | awk '{if(NR>1)print $9}'))
     for user in ${USERS[*]}; do
-        homepath=$(eval echo "~$user")
+        homepath=$(echo "~$user")
         IFS=''
         echo $VIMRC > ${homepath}/.vimrc
         unset IFS
-        echo "Installed the Ultimate Vim configuration for user $user successfully! Enjoy :-)"
+        echo "Installed the Ultimate Vim configuration for user $user"
     done
-    echo "Installed the Ultimate Vim configuration successfully! Enjoy :-)"
+    echo "Ultimate Vim installed"
     exit 0
 else
-    SELECTED_USERS=(${@:2})
-    echo "Selected users: ${SELECTED_USERS[@]}"
-    for user in ${SELECTED_USERS[@]}; do
-        homepath=$(eval echo "~$user")
-        IFS=''
-        echo $VIMRC > ${homepath}/.vimrc
-        unset IFS
-        echo "Installed the Ultimate Vim configuration for user $user successfully! Enjoy :-)"
-    done
+	if [ ! -d "$usrd" ]; then
+		mkdir $usrd
+	fi
+	IFS=''
+	echo $VIMRC > ${usrd}/.vimrc
+	unset IFS
+	echo "Installed the Ultimate Vim configuration at $usrd"
     exit 0
 fi
+
