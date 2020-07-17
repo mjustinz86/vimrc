@@ -29,7 +29,8 @@ set guioptions-=L
 
 " Colorscheme
 set background=dark
-colorscheme peaksea
+set t_Co=8
+colorscheme atom
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

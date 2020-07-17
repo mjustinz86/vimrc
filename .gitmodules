@@ -1,0 +1,3 @@
+[submodule "awesome-vim-colorschemes"]
+	path = awesome-vim-colorschemes
+	url = git@github.com:rafi/awesome-vim-colorschemes.git
