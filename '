@@ -31,7 +31,7 @@ set guioptions-=L
 set runtimepath+=~/.vim_runtime/awesome-vim-colorschemes
 set background=dark
 set t_Co=256
-colorscheme onedark
+colorscheme onehalfdark
 " Some available colors
 " 256_noir.vim
 " OceanicNext.vim
