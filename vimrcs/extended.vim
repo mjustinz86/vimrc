@@ -29,9 +29,9 @@ set guioptions-=L
 
 " Colorscheme
 set runtimepath+=~/.vim_runtime/awesome-vim-colorschemes
-set background=dark
+set background=light
 set t_Co=256
-colorscheme onedark
+colorscheme angr
 " Some available colors
 " 256_noir.vim
 " OceanicNext.vim
@@ -65,7 +65,7 @@ colorscheme onedark
 " happy_hacking.vim
 " hybrid.vim
 " hybrid_material.vim
-" hybrid_reverse.vim
+"ngr hybrid_reverse.vim
 " iceberg.vim
 " jellybeans.vim
 " lightning.vim
